@@ -361,7 +361,6 @@ export const SignUpPage: React.FC = () => {
 
       // Skip sign-in step for now and just set authenticated
       if (signUpData.user) {
-        // Load a sample script
         const sampleScript = `INT. RESTAURANT - NIGHT
 
 JJ sits down with his parents: his dad, DR. SHERWIN JAMSHIDI (50s, distinguished and charming) and his mom DR. VANESSA JAMSHIDI (50s, ageless beauty with superhuman discipline). A WAITER is taking their order.
@@ -417,6 +416,7 @@ Off JJ, another parental battle lost.`;
         setText(sampleScript);
         setIsAuthenticated(true);
         setActiveTab("editor");
+        navigate("/dashboard");
       } else {
         throw new Error("Signup failed. Please try again.");
       }

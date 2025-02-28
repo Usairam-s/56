@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { useTeleprompterStore } from "../store/teleprompterStore";
 import { LoadingSpinner } from "../components/LoadingSpinner";

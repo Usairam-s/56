@@ -22,7 +22,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { LoadingSpinner } from "./LoadingSpinner";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const testimonials = [
   {
@@ -123,12 +123,41 @@ const benefits = [
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const { setText, setActiveTab, setIsAuthenticated } = useTeleprompterStore();
+  const { setText, setActiveTab, isAuthenticated, setIsAuthenticated } =
+    useTeleprompterStore();
   const [showLogin, setShowLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  //chekc for auth first
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        setIsAuthenticated(!!session);
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [setIsAuthenticated]);
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  //check for auth first
 
   // Screenshots for slider
   const screenshots = [
