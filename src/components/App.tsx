@@ -42,6 +42,7 @@ import {
 
 import { SignInPage } from "../pages/SignInPage";
 import { SignUPage } from "../pages/SignInPage";
+import { Dashbaord } from "../pages/Dashboard";
 
 type Tab =
   | "editor"
@@ -154,8 +155,7 @@ const App: React.FC = () => {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/" element={<LandingPage />} />
-          {/* <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} /> */}
+          <Route path="/dashboard" element={<Dashbaord />} />
         </Routes>
       </Router>
 
