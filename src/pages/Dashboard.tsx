@@ -42,6 +42,8 @@ import { TokenSystem } from "../components/TokenSystem";
 import { FAQPage } from "../components/FAQPage";
 import { Controls } from "../components/Controls";
 
+import { useNavigate } from "react-router-dom";
+
 type Tab =
   | "editor"
   | "analysis"
@@ -127,7 +129,8 @@ export const Dashbaord: React.FC = () => {
     try {
       await supabase.auth.signOut();
       setIsAuthenticated(false);
-      setActiveTab("landing");
+      // setActiveTab("landing");
+      navigate("/"); // Redirects to /signin
     } catch (error) {
       console.error("Sign out failed:", error);
     }
@@ -136,6 +139,8 @@ export const Dashbaord: React.FC = () => {
   const handleHomeClick = () => {
     setActiveTab("landing");
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
