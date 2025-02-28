@@ -1,0 +1,467 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply antialiased text-gray-900 dark:text-gray-100;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400/20 rounded-full hover:bg-gray-400/40 transition-colors;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Glass effect backgrounds */
+.glass {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20 dark:bg-black/40 dark:border-white/10;
+}
+
+.glass-light {
+  @apply bg-white/80 backdrop-blur-lg border border-white/20;
+}
+
+.glass-dark {
+  @apply bg-black/40 backdrop-blur-lg border border-white/10;
+}
+
+/* Custom range input styling */
+input[type="range"] {
+  @apply appearance-none bg-transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @apply appearance-none w-4 h-4 rounded-full bg-indigo-600 cursor-pointer hover:bg-indigo-700 transition-colors;
+  margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @apply w-4 h-4 rounded-full bg-indigo-600 cursor-pointer border-0 hover:bg-indigo-700 transition-colors;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  @apply w-full h-2 rounded-lg bg-white/20;
+}
+
+input[type="range"]::-moz-range-track {
+  @apply w-full h-2 rounded-lg bg-white/20;
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Prompter text styles */
+.prompter-text {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Character highlight animation */
+.character-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.character-highlight::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  animation: shine 3s infinite;
+}
+
+.highlight-text {
+  text-shadow: 0 0 5px rgba(79, 70, 229, 0.5);
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  40%, 100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Grid layout */
+.grid-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(500px, 2fr) minmax(300px, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1280px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Controls bar */
+.controls-bar {
+  @apply fixed bottom-0 left-0 right-0 z-50;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0;
+}
+
+/* Progress steps */
+.progress-step {
+  @apply relative flex items-center justify-center;
+}
+
+.progress-step::after {
+  content: '';
+  @apply absolute h-0.5 w-full bg-gray-200 dark:bg-gray-700 left-1/2 top-1/2 -translate-y-1/2;
+}
+
+.progress-step.completed::after {
+  @apply bg-indigo-600 dark:bg-indigo-400;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25%);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+/* Audio loading indicator */
+.audio-loading {
+  @apply relative;
+}
+
+.audio-loading::after {
+  content: '';
+  @apply absolute inset-0 bg-indigo-600/20 dark:bg-indigo-400/20 rounded-lg animate-pulse;
+}
+
+/* Document preview styles */
+.scene-heading {
+  @apply font-bold text-gray-300 my-2;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  text-align: left;
+  margin: 1em auto 0.5em;
+  width: 60ch;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+.action {
+  @apply text-gray-100 mb-2;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  text-align: left;
+  margin: 0.5em auto;
+  width: 60ch;
+  line-height: 1.5;
+  padding-right: 1em;
+}
+
+.character {
+  @apply font-bold text-indigo-400 my-1;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  text-align: center !important;
+  margin: 1em auto 0.25em;
+  width: 35ch;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1.5;
+}
+
+.dialog {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  text-align: center !important;
+  margin: 0.25em auto 0.5em;
+  width: 35ch;
+  line-height: 1.5;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 1em;
+}
+
+.parenthetical {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  text-align: center !important;
+  font-style: italic;
+  margin: 0.25em auto 0.25em;
+  width: 25ch;
+  color: rgba(156, 163, 175, 0.8);
+  line-height: 1.5;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 1em;
+}
+
+.technical-direction {
+  @apply text-gray-500 italic;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  text-align: center;
+  margin: 1em auto;
+  width: 45ch;
+  line-height: 1.5;
+  padding-right: 1em;
+}
+
+/* Scale for active elements */
+.scale-102 {
+  transform: scale(1.02);
+}
+
+/* Print styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  .print-container, .print-container * {
+    visibility: visible;
+  }
+  
+  .print-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white;
+    color: black;
+  }
+}
+
+/* Make teleprompter more compact */
+.teleprompter-container {
+  padding: 0.25rem 0.5rem !important;
+  height: 100% !important;
+}
+
+/* Reduce container padding */
+.container {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Compact app layout */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+/* Compact content */
+.compact-section {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.compact-card {
+  padding: 0.75rem;
+}
+
+.compact-controls button {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Make buttons more compact */
+.compact-button {
+  padding: 0.25rem 0.75rem !important;
+}
+
+/* Make headers more compact */
+.compact-header {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.script-editor {
+  /* Standard screenplay margins */
+  --line-height: 1.6;
+  --font-size: 14pt;
+  --font-family: 'Courier Prime', 'Courier New', monospace;
+  --character-indent: 40%;
+  --dialog-indent: 25%;
+  --parenthetical-indent: 30%;
+  --scene-indent: 0;
+  --action-indent: 0;
+  --max-width: 65ch;
+  --page-width: 8.5in;
+  --page-height: 11in;
+  --margin-top: 1in;
+  --margin-bottom: 1in;
+  --margin-left: 1.5in;
+  --margin-right: 1in;
+  --character-left: 4.2in;
+  --dialog-left: 2.9in;
+  --parenthetical-left: 3.1in;
+  --action-left: 1.5in;
+  --scene-left: 1.5in;
+
+  /* Base text styles */
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  white-space: pre;
+  tab-size: 4;
+  letter-spacing: 0;
+  text-align: left;
+  padding: 1rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: transparent;
+  color: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Screenplay-specific styles */
+  & .scene-heading {
+    margin-left: var(--scene-left);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  & .character-name {
+    margin-left: var(--character-left);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  
+  & .dialog {
+    margin-left: var(--dialog-left);
+    margin-right: var(--margin-right);
+    line-height: 1.7;
+  }
+  
+  & .parenthetical {
+    margin-left: var(--parenthetical-left);
+    margin-right: var(--margin-right);
+    font-style: italic;
+    color: rgba(156, 163, 175, 0.8);
+  }
+  
+  & .action {
+    margin-left: var(--action-left);
+    margin-right: var(--margin-right);
+    line-height: 1.8;
+  }
+}
+
+/* Character name styles */
+.character-name {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 1.5em 0 0.5em;
+  padding-left: var(--character-indent);
+  letter-spacing: 0.5px;
+}
+
+/* Dialog styles */
+.dialog-text {
+  text-align: left;
+  margin: 0 0 1em;
+  padding-left: var(--dialog-indent);
+  max-width: var(--max-width);
+  line-height: 1.7;
+}
+
+/* Parenthetical styles */
+.parenthetical-text {
+  text-align: left;
+  font-style: italic;
+  margin: 0.25em 0;
+  padding-left: var(--parenthetical-indent);
+  color: rgba(156, 163, 175, 0.8);
+  font-size: 0.95em;
+}
+
+/* Scene heading styles */
+.scene-heading {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 2em 0 1em;
+  padding-left: var(--scene-indent);
+  letter-spacing: 1px;
+}
+
+/* Action/description styles */
+.action-text {
+  text-align: left;
+  margin: 1em 0;
+  padding-left: var(--action-indent);
+  max-width: var(--max-width);
+  line-height: 1.8;
+}
